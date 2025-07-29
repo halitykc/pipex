@@ -6,7 +6,7 @@
 /*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 12:09:21 by hyakici           #+#    #+#             */
-/*   Updated: 2025/07/29 15:57:55 by hyakici          ###   ########.fr       */
+/*   Updated: 2025/07/29 17:59:34 by hyakici          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ char	*path_find(char **envp)
 
 char	*pars_cmd(char *argv, char **envp) // bura kontorl edilecek
 {
-	char *res;
 	char **split;
 	char **path;
 	char *paths;
@@ -126,20 +125,20 @@ char	*pars_cmd(char *argv, char **envp) // bura kontorl edilecek
 	paths = path_find(envp);
 	path = ft_split(paths, ':');
 	split = ft_split(argv, ' ');
-
 	while (path[i])
 	{
 		temp = ft_strjoin(path[i], split[0]);
-		if (access(temp, F_OK))
+		if (access(temp, F_OK) == 0)
 		{
+			free_split(split);
+			free_split(path);
 			return (temp);
 		}
-
 		i++;
 	}
-
 	free_split(split);
-	return (res);
+	free_split(path);
+	return (NULL);
 }
 
 void	check_if_validfile(char *file)
