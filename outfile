@@ -1,0 +1,17 @@
+total 228
+-rw-r--r-- 1 hyakici 2025_istanbul   2113 Tem 29 12:09 ft_split.c
+-rw-r--r-- 1 hyakici 2025_istanbul   2432 Tem 29 13:40 ft_split.o
+-rw-r--r-- 1 hyakici 2025_istanbul   1953 Tem 29 12:09 ft_strjoin.c
+-rw-r--r-- 1 hyakici 2025_istanbul   2176 Tem 29 13:40 ft_strjoin.o
+-rw-r--r-- 1 hyakici 2025_istanbul   1454 Tem 29 12:09 ft_substr.c
+-rw-r--r-- 1 hyakici 2025_istanbul   1640 Tem 29 13:40 ft_substr.o
+---------- 1 hyakici 2025_istanbul 138216 Tem 29 13:41 ls
+-rw-r--r-- 1 hyakici 2025_istanbul   1247 Tem 29 12:05 Makefile
+-rw---S--T 1 hyakici 2025_istanbul      0 Tem 29 13:43 outfile
+-rwxr-xr-x 1 hyakici 2025_istanbul  21728 Tem 29 13:41 pipex
+-rw-r--r-- 1 hyakici 2025_istanbul  14288 Tem 29 13:40 pipex.a
+-rw-r--r-- 1 hyakici 2025_istanbul   1318 Tem 29 13:26 pipex.c
+-rw-r--r-- 1 hyakici 2025_istanbul   1597 Tem 29 13:36 pipex.h
+-rw-r--r-- 1 hyakici 2025_istanbul   1760 Tem 29 13:40 pipex.o
+-rw-r--r-- 1 hyakici 2025_istanbul   3463 Tem 29 13:40 utils.c
+-rw-r--r-- 1 hyakici 2025_istanbul   5592 Tem 29 13:40 utils.o

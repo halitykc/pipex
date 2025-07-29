@@ -1,37 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   kurek.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/29 12:06:06 by hyakici           #+#    #+#             */
-/*   Updated: 2025/07/29 15:46:54 by hyakici          ###   ########.fr       */
+/*   Created: 2025/07/29 15:06:49 by hyakici           #+#    #+#             */
+/*   Updated: 2025/07/29 15:32:01 by hyakici          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <stdio.h>
+#include <string.h>
 
-void	ft_free(char **res, int i)
+char	*path(char **envp)
 {
-	while (--i >= 0)
-		free(res[i]);
-	free(res);
+	while (*envp)
+	{
+		if (!strncmp(*envp, "PATH", 4))
+		{
+			*envp = strchr(*envp, '=');
+			(*envp)++;
+			return (*envp);
+		}
+		envp++;
+	}
+	return (NULL);
 }
 
-int	main(int argc, char *argv[], char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	int		pipe[2];
-	t_pipex	pipe_infos;
+	char	*s;
+	char	**sa;
 
-	if (argc == 5)
+	(void)argc;
+	(void)argv;
+	s = path(envp);
+	sa = ft_split(s, ':');
+	while (*sa != NULL)
 	{
-		control_params(argc, argv, envp);
-		start_pipex(&pipe_infos, argc, argv);
-		init_pipes(pipe);
-		start_fork(pipe, argc, argv, pipe_infos);
-		close_fds(pipe, pipe_infos.infile, pipe_infos.outfile);
-		wait_for_childs();
-		return (0);
+		printf("%s\n", *sa);
+		sa++;
 	}
+	return (0);
 }
