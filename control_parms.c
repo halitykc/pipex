@@ -34,16 +34,15 @@ void	check_if_validfile(char *file)
 
 void	check_if_validfile2(char *file)
 {
-	if (access(file, F_OK) != 0)
+	if (access(file, F_OK) == 0)
 	{
-		perror("==> File Doesnt Exist!");
-		return;
+		if (access(file, R_OK | W_OK) != 0)
+		{
+			perror("==> Check File Permisions!");
+			return;
+		}
 	}
-	if (access(file, R_OK | W_OK) != 0)
-	{
-		perror("==> Check File Permisions!");
-		return;
-	}
+	
 }
 
 int	output_file_exist(char *outfile)
