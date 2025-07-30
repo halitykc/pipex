@@ -37,6 +37,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(const char *s);
+char	*ft_strchr(const char *str, int c);
 
 void	control_params(int argc, char **argv);
 int		output_file_exist(char *outfile);

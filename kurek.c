@@ -36,6 +36,6 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	printf("aaaa");
+	printf("aaaa\nbbbbbbbbbbbb\nvvvvvvvvvvvvvvvvvvv\n");
 	return (0);
 }

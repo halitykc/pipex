@@ -32,22 +32,12 @@ int	main(int argc, char *argv[], char **envp)
 		start_fork(pipe, argc, argv, pipe_infos);
 		close_fds(pipe, pipe_infos.infile, pipe_infos.outfile);
 		wait_for_childs();
+		free_split(pipe_infos.paths);
 		return (0);
 	}
+	else
+	{
+		write(1,"Thats how yu use it ./pipex file1 \"cmd\" \"cmd2\" file2\n",54);
+	}
+	
 }
-
-
-// int	main(int argc, char *argv[], char **envp)
-// {
-// 	t_pipex	pipe_infos;
-// 	(void)argc;
-// 	(void)argv;
-// 	pipe_infos.paths = path_find(envp); // free_split ile tam temizleniyor
-// 	pipe_infos.cmd = pars_cmd(argv[1], pipe_infos);
-// 	run_command(argv[1], pipe_infos);
-
-
-
-
-// 	return (0);
-// }

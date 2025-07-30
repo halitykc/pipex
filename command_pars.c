@@ -19,35 +19,45 @@ char	**path_find(char **envp)
 	return (NULL);
 }
 
+int	contains_path(char **split, char **cmd)
+{
+	if (ft_strchr(split[0], '/'))          // NOT YOUR FUNCTİON
+    {
+        if (access(split[0], F_OK | X_OK) == 0)
+        {
+            *cmd = ft_strdup(split[0]);
+            free_split(split);
+            return (1);
+        }
+		return (2);
+    }
+	return (0);
+}
+
+void	join_cmd(char *path, char *split, char **cmd_path)
+{
+	char *tmp;
+
+	tmp = ft_strjoin(path, "/");
+	*cmd_path = ft_strjoin(tmp, split);
+	free(tmp);
+}
 
 char	*pars_cmd(char *argv, t_pipex stuff) // bura kontorl edilecek
 {
 	char **split;
 	char *cmd_path;
-	char *temp;
 	int i;
 
 	split = ft_split(argv, ' ');
 	if (!split || !*split)
 		return (NULL);
-
-    if (strchr(split[0], '/'))          // NOT YOUR FUNCTİON
-    {
-        if (access(split[0], F_OK | X_OK) == 0)
-        {
-            cmd_path = ft_strdup(split[0]);
-            free_split(split);
-            return (cmd_path);
-        }
-        
-    }
-    
+	if (contains_path(split, &cmd_path))
+		return (cmd_path);
 	i = -1;
 	while (stuff.paths[++i])
 	{
-		temp = ft_strjoin(stuff.paths[i], "/");
-		cmd_path = ft_strjoin(temp, split[0]);
-		free(temp);
+		join_cmd(stuff.paths[i], split[0], &cmd_path);
 		if (access(cmd_path, F_OK | X_OK) == 0)
 		{
 			free_split(split);
@@ -66,13 +76,15 @@ void	run_command(char *arguments, t_pipex stuff)
 	args = ft_split(arguments, ' ');
     if (!args || !*args)
 	{
-		perror("ft_split failed or args empty");
+		perror("ft_split failed");
 		exit(EXIT_FAILURE);
 	}
-	if (execve(stuff.cmd, args, NULL) == -1)
+	if (stuff.cmd == NULL || execve(stuff.cmd, args, NULL) == -1)
     {
         perror("execve failed");
         free_split(args);
+		free_split(stuff.paths);
+		free(stuff.cmd);
         exit(EXIT_FAILURE);
     }
 }
