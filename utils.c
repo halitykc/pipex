@@ -63,6 +63,11 @@ void	start_fork(int pipes[2], int argc, char **argv, t_pipex pipex_info)
 void	start_pipex(t_pipex *pipex, int argc, char **argv, char **envp)
 {
 	pipex->infile = open(argv[1], O_RDWR, 0644);
+	if (pipex->infile == -1)
+	{
+		perror("File Not Found");
+		exit(EXIT_FAILURE);
+	}
 	if (!output_file_exist(argv[argc - 1]))
 	{
 		pipex->outfile = open(argv[argc - 1], O_RDWR | O_TRUNC | O_CREAT, 0644);

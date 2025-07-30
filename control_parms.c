@@ -22,12 +22,12 @@ void	check_if_validfile(char *file)
 {
 	if (access(file, F_OK) != 0)
 	{
-		write(1, " ==> File Doesnt Exist!\n", 24);
+		perror("==> File Doesnt Exist!");
 		exit(EXIT_FAILURE);
 	}
 	if (access(file, R_OK | W_OK) != 0)
 	{
-		write(1, " ==> Check File Permisions!\n", 28);
+		perror("==> Check File Permisions!");
 		exit(EXIT_FAILURE);
 	}
 }

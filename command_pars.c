@@ -29,7 +29,13 @@ int	contains_path(char **split, char **cmd)
             free_split(split);
             return (1);
         }
-		return (2);
+		else
+		{
+			free_split(split);
+			*cmd = NULL;
+			return 2;
+		}
+		
     }
 	return (0);
 }
@@ -81,7 +87,7 @@ void	run_command(char *arguments, t_pipex stuff)
 	}
 	if (stuff.cmd == NULL || execve(stuff.cmd, args, NULL) == -1)
     {
-        perror("execve failed");
+        perror("Command Not Found");
         free_split(args);
 		free_split(stuff.paths);
 		free(stuff.cmd);
