@@ -7,7 +7,7 @@ char	**path_find(char **envp)
 
 	while (*envp)
 	{
-		if (!strncmp(*envp, "PATH", 4))
+		if (!strncmp(*envp, "PATH=", 5))
 		{
 			*envp = strchr(*envp, '=');
 			(*envp)++;

@@ -32,6 +32,20 @@ void	check_if_validfile(char *file)
 	}
 }
 
+void	check_if_validfile2(char *file)
+{
+	if (access(file, F_OK) != 0)
+	{
+		perror("==> File Doesnt Exist!");
+		return;
+	}
+	if (access(file, R_OK | W_OK) != 0)
+	{
+		perror("==> Check File Permisions!");
+		return;
+	}
+}
+
 int	output_file_exist(char *outfile)
 {
 	if (access(outfile, F_OK) != 0)
@@ -50,7 +64,7 @@ void	control_params(int argc, char **argv)
 	while (++i < argc - 1)
 	{
 		if (i == 1)
-			check_if_validfile(argv[i]);
+			check_if_validfile2(argv[i]);
 	}
 	if (i == argc - 1 && !output_file_exist(argv[argc - 1]))
 	{

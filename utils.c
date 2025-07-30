@@ -66,7 +66,7 @@ void	start_pipex(t_pipex *pipex, int argc, char **argv, char **envp)
 	if (pipex->infile == -1)
 	{
 		perror("File Not Found");
-		exit(EXIT_FAILURE);
+		pipex->infile = open("/dev/null", O_RDONLY);
 	}
 	if (!output_file_exist(argv[argc - 1]))
 	{
