@@ -16,7 +16,7 @@ CFLAGS = -Wall -Werror -Wextra
 
 NAME = pipex.a
 
-SRCS = ft_split.c ft_strjoin.c ft_substr.c pipex.c utils.c
+SRCS = ft_split.c ft_strjoin.c ft_substr.c pipex.c utils.c command_pars.c ft_strdup.c
 
 OBJS = $(SRCS:.c=.o)
 		

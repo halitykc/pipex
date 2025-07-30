@@ -73,7 +73,7 @@ static int	ft_fill_w(char **res, char const *s, char c, int num)
 		}
 		i++;
 	}
-	res[i] = 0;
+	res[i] = NULL;
 	return (1);
 }
 

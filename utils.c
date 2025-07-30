@@ -49,20 +49,6 @@ void	wait_for_childs(void)
 	wait(NULL);
 }
 
-void	run_command(char *arguments)
-{
-	char	*cmd;
-	char	**args;
-	char	*temp;
-
-	args = ft_split(arguments, ' ');
-	cmd = "/usr/bin/";
-	temp = args[0];
-	args[0] = ft_strjoin(cmd, args[0]);
-	free(temp);
-	execve(args[0], args, NULL);
-	exit(EXIT_FAILURE);
-}
 
 void	start_fork(int pipes[2], int argc, char **argv, t_pipex pipex_info)
 {
@@ -82,94 +68,40 @@ void	start_fork(int pipes[2], int argc, char **argv, t_pipex pipex_info)
 			else
 				dup2(pipes[1], STDOUT_FILENO);
 			close_fds(pipes, pipex_info.infile, pipex_info.outfile);
-			run_command(argv[i + 2]);
+			pipex_info.cmd = pars_cmd(argv[i + 2], pipex_info);
+			run_command(argv[i + 2], pipex_info);
 		}
 	}
 }
 
-void	start_pipex(t_pipex *pipex, int argc, char **argv)
+void	start_pipex(t_pipex *pipex, int argc, char **argv, char **envp)
 {
-	pipex->infile = open(argv[1], O_RDONLY);
+	pipex->infile = open(argv[1], O_RDWR, 0644);
 	if (!output_file_exist(argv[argc - 1]))
 	{
-		pipex->outfile = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT);
+		pipex->outfile = open(argv[argc - 1], O_RDWR | O_TRUNC | O_CREAT, 0644);
 	}
 	else
-		pipex->outfile = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT);
+		pipex->outfile = open(argv[argc - 1], O_RDWR | O_TRUNC | O_CREAT, 0644);
+	pipex->paths = path_find(envp);
 }
 
-char	*path_find(char **envp)
-{
-	while (*envp)
-	{
-		if (!strncmp(*envp, "PATH", 4))
-		{
-			*envp = strchr(*envp, '=');
-			(*envp)++;
-			return (*envp);
-		}
-		envp++;
-	}
-	return (NULL);
-}
 
-char	*pars_cmd(char *argv, char **envp) // bura kontorl edilecek
-{
-	char **split;
-	char **path;
-	char *paths;
-	char *temp;
-	int i;
+/*			CONTROL			*/
 
-	i = 0;
-	paths = path_find(envp);
-	path = ft_split(paths, ':');
-	split = ft_split(argv, ' ');
-	while (path[i])
-	{
-		temp = ft_strjoin(path[i], split[0]);
-		if (access(temp, F_OK) == 0)
-		{
-			free_split(split);
-			free_split(path);
-			return (temp);
-		}
-		i++;
-	}
-	free_split(split);
-	free_split(path);
-	return (NULL);
-}
 
 void	check_if_validfile(char *file)
 {
 	if (access(file, F_OK) != 0)
 	{
-		write(1, file, strlen(file));
 		write(1, " ==> File Doesnt Exist!\n", 24);
 		exit(EXIT_FAILURE);
 	}
 	if (access(file, R_OK | W_OK) != 0)
 	{
-		write(1, file, strlen(file));
 		write(1, " ==> Check File Permisions!\n", 28);
 		exit(EXIT_FAILURE);
 	}
-}
-
-void	check_if_validcmd(char *argv, char **envp)
-{
-	char	*cmd;
-
-	cmd = pars_cmd(argv, envp);
-	printf("%s\n", cmd);
-	if (access(cmd, X_OK) != 0)
-	{
-		write(1, "==> Check Command!\n", 20);
-		free(cmd);
-		exit(EXIT_FAILURE);
-	}
-	free(cmd);
 }
 
 int	output_file_exist(char *outfile)
@@ -182,7 +114,7 @@ int	output_file_exist(char *outfile)
 		return (0);
 }
 
-void	control_params(int argc, char **argv, char **envp)
+void	control_params(int argc, char **argv)
 {
 	int	i;
 
@@ -191,8 +123,6 @@ void	control_params(int argc, char **argv, char **envp)
 	{
 		if (i == 1)
 			check_if_validfile(argv[i]);
-		else
-			check_if_validcmd(argv[i], envp);
 	}
 	if (i == argc - 1 && !output_file_exist(argv[argc - 1]))
 	{

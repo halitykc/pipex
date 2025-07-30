@@ -36,12 +36,6 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	s = path(envp);
-	sa = ft_split(s, ':');
-	while (*sa != NULL)
-	{
-		printf("%s\n", *sa);
-		sa++;
-	}
+	printf("aaaa");
 	return (0);
 }

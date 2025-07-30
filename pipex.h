@@ -24,16 +24,28 @@ typedef struct s_pipex
 {
 	int	infile;
 	int	outfile;
+
+	char **paths;
+
+	char *cmd;
+	char **args;
+
+
 }		t_pipex;
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strdup(const char *s);
 
 void	control_params(int argc, char **argv);
 int		output_file_exist(char *outfile);
+char	**path_find(char **envp);
+char	*pars_cmd(char *argv, t_pipex stuff); // bura kontorl edilecek
+void	free_split(char **split);
+void	run_command(char *arguments, t_pipex stuff);
 
-void	start_pipex(t_pipex *pipex, int argc, char **argv);
+void	start_pipex(t_pipex *pipex, int argc, char **argv, char **envp);
 void	init_pipes(int pipes[2]);
 void	start_fork(int pipes[2], int argc, char **argv, t_pipex pipex_info);
 void	close_fds(int pipes[2], int infile, int outfile);
