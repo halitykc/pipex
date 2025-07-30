@@ -60,8 +60,18 @@ void	control_params(int argc, char **argv)
 	int	i;
 
 	i = 0;
-	while (++i < argc - 1)
+	while (++i < argc)
 	{
+		if (argv[i][0] == '\0')
+		{
+			write(2,"Wrong Usage! How to use = ./pipex infile cmd1 cmd2 outfile\n", 60);
+			exit(EXIT_FAILURE);
+		}
+	}
+	
+	i = 0;
+	while (++i < argc - 1)
+	{	
 		if (i == 1)
 			check_if_validfile2(argv[i]);
 	}
