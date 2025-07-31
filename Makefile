@@ -6,7 +6,7 @@
 #    By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/10 15:32:20 by hyakici           #+#    #+#              #
-#    Updated: 2025/06/13 15:08:00 by hyakici          ###   ########.fr        #
+#    Updated: 2025/07/31 14:24:50 by hyakici          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,4 +38,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean re fclean bonus
+.PHONY: all clean re fclean run

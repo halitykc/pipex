@@ -6,7 +6,7 @@
 /*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 12:09:21 by hyakici           #+#    #+#             */
-/*   Updated: 2025/07/31 13:55:50 by hyakici          ###   ########.fr       */
+/*   Updated: 2025/07/31 14:26:47 by hyakici          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_pipes(int pipes[2])
 {
 	if (pipe(pipes) == -1)
 	{
-		perror("Pipe Failed\n");
+		perror("Pipe Failed");
 		exit(EXIT_FAILURE);
 	}
 }

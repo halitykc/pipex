@@ -6,7 +6,7 @@
 /*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 12:08:47 by hyakici           #+#    #+#             */
-/*   Updated: 2025/07/31 14:11:22 by hyakici          ###   ########.fr       */
+/*   Updated: 2025/07/31 14:27:49 by hyakici          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 
 # include <fcntl.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/wait.h>
