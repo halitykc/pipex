@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   command_pars.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/31 14:04:38 by hyakici           #+#    #+#             */
+/*   Updated: 2025/07/31 14:06:05 by hyakici          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "pipex.h"
 
 char	**path_find(char **envp)
 {
-	char **paths;
+	char	**paths;
 
 	while (*envp)
 	{
@@ -21,39 +32,38 @@ char	**path_find(char **envp)
 
 int	contains_path(char **split, char **cmd)
 {
-	if (ft_strchr(split[0], '/'))          // NOT YOUR FUNCTİON
-    {
-        if (access(split[0], F_OK | X_OK) == 0)
-        {
-            *cmd = ft_strdup(split[0]);
-            free_split(split);
-            return (1);
-        }
+	if (ft_strchr(split[0], '/'))
+	{
+		if (access(split[0], F_OK | X_OK) == 0)
+		{
+			*cmd = ft_strdup(split[0]);
+			free_split(split);
+			return (1);
+		}
 		else
 		{
 			free_split(split);
 			*cmd = NULL;
-			return 2;
+			return (2);
 		}
-		
-    }
+	}
 	return (0);
 }
 
 void	join_cmd(char *path, char *split, char **cmd_path)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = ft_strjoin(path, "/");
 	*cmd_path = ft_strjoin(tmp, split);
 	free(tmp);
 }
 
-char	*pars_cmd(char *argv, t_pipex stuff) // bura kontorl edilecek
+char	*pars_cmd(char *argv, t_pipex stuff)
 {
-	char **split;
-	char *cmd_path;
-	int i;
+	char	**split;
+	char	*cmd_path;
+	int		i;
 
 	split = ft_split(argv, ' ');
 	if (!split || !*split)
@@ -80,17 +90,17 @@ void	run_command(char *arguments, t_pipex stuff)
 	char	**args;
 
 	args = ft_split(arguments, ' ');
-    if (!args || !*args)
+	if (!args || !*args)
 	{
 		perror("ft_split failed");
 		exit(EXIT_FAILURE);
 	}
 	if (stuff.cmd == NULL || execve(stuff.cmd, args, NULL) == -1)
-    {
-        perror("Command Not Found");
-        free_split(args);
+	{
+		perror(args[0]);
+		free_split(args);
 		free_split(stuff.paths);
 		free(stuff.cmd);
-        exit(EXIT_FAILURE);
-    }
+		exit(EXIT_FAILURE);
+	}
 }

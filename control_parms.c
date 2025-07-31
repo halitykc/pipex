@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   control_parms.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/31 13:57:00 by hyakici           #+#    #+#             */
+/*   Updated: 2025/07/31 14:09:21 by hyakici          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
-
-/*			CONTROL			*/
 void	free_split(char **split)
 {
 	int	i;
@@ -17,17 +27,16 @@ void	free_split(char **split)
 	free(split);
 }
 
-
 void	check_if_validfile(char *file)
 {
 	if (access(file, F_OK) != 0)
 	{
-		perror("==> File Doesnt Exist!");
+		perror(file);
 		exit(EXIT_FAILURE);
 	}
 	if (access(file, R_OK | W_OK) != 0)
 	{
-		perror("==> Check File Permisions!");
+		perror(file);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -38,11 +47,10 @@ void	check_if_validfile2(char *file)
 	{
 		if (access(file, R_OK | W_OK) != 0)
 		{
-			perror("==> Check File Permisions!");
-			return;
+			perror(file);
+			return ;
 		}
 	}
-	
 }
 
 int	output_file_exist(char *outfile)
@@ -64,19 +72,14 @@ void	control_params(int argc, char **argv)
 	{
 		if (argv[i][0] == '\0')
 		{
-			write(2,"Wrong Usage! How to use = ./pipex infile cmd1 cmd2 outfile\n", 60);
+			write(1,
+				"Thats how yu use it ./pipex file1 \"cmd\" \"cmd2\" file2\n",
+				54);
 			exit(EXIT_FAILURE);
 		}
 	}
-	
-	i = 0;
-	while (++i < argc - 1)
-	{	
-		if (i == 1)
-			check_if_validfile2(argv[i]);
-	}
-	if (i == argc - 1 && !output_file_exist(argv[argc - 1]))
+	if (!output_file_exist(argv[argc - 1]))
 	{
-		check_if_validfile(argv[i]);
+		check_if_validfile(argv[argc - 1]);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 12:09:21 by hyakici           #+#    #+#             */
-/*   Updated: 2025/07/29 17:59:34 by hyakici          ###   ########.fr       */
+/*   Updated: 2025/07/31 13:55:50 by hyakici          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	wait_for_childs(void)
 	wait(NULL);
 	wait(NULL);
 }
-
 
 void	start_fork(int pipes[2], int argc, char **argv, t_pipex pipex_info)
 {
@@ -65,7 +64,7 @@ void	start_pipex(t_pipex *pipex, int argc, char **argv, char **envp)
 	pipex->infile = open(argv[1], O_RDWR, 0644);
 	if (pipex->infile == -1)
 	{
-		perror("File Not Found");
+		perror(argv[1]);
 		pipex->infile = open("/dev/null", O_RDONLY);
 	}
 	if (!output_file_exist(argv[argc - 1]))
