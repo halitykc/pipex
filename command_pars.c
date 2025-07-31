@@ -6,7 +6,7 @@
 /*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 14:04:38 by hyakici           #+#    #+#             */
-/*   Updated: 2025/07/31 14:46:52 by hyakici          ###   ########.fr       */
+/*   Updated: 2025/07/31 15:13:44 by hyakici          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char	**path_find(char **envp)
 
 	while (*envp)
 	{
-		if (!strncmp(*envp, "PATH=", 5))
+		if (!ft_strncmp(*envp, "PATH=", 5))
 		{
-			*envp = strchr(*envp, '=');
+			*envp = ft_strchr(*envp, '=');
 			(*envp)++;
 			paths = ft_split(*envp, ':');
 			return (paths);
