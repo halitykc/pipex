@@ -6,7 +6,7 @@
 /*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 14:04:38 by hyakici           #+#    #+#             */
-/*   Updated: 2025/07/31 14:06:05 by hyakici          ###   ########.fr       */
+/*   Updated: 2025/07/31 14:46:52 by hyakici          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**path_find(char **envp)
 	return (NULL);
 }
 
-int	contains_path(char **split, char **cmd)
+static int	contains_path(char **split, char **cmd)
 {
 	if (ft_strchr(split[0], '/'))
 	{
@@ -50,7 +50,7 @@ int	contains_path(char **split, char **cmd)
 	return (0);
 }
 
-void	join_cmd(char *path, char *split, char **cmd_path)
+static void	join_cmd(char *path, char *split, char **cmd_path)
 {
 	char	*tmp;
 

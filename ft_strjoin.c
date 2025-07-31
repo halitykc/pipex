@@ -6,27 +6,11 @@
 /*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 12:09:04 by hyakici           #+#    #+#             */
-/*   Updated: 2025/07/31 14:08:02 by hyakici          ###   ########.fr       */
+/*   Updated: 2025/07/31 14:57:13 by hyakici          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	void			*ptr;
-	unsigned char	*p;
-	size_t			i;
-
-	ptr = malloc(size * nmemb);
-	if (!ptr)
-		return (NULL);
-	p = (unsigned char *)ptr;
-	i = 0;
-	while (i < nmemb * size)
-		p[i++] = 0;
-	return (ptr);
-}
 
 char	*ft_strchr(const char *str, int c)
 {
@@ -43,23 +27,7 @@ char	*ft_strchr(const char *str, int c)
 	return (0);
 }
 
-static void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	unsigned char	*p;
-	unsigned char	*c;
-
-	if (!dest && !src)
-		return (dest);
-	p = (unsigned char *)dest;
-	c = (unsigned char *)src;
-	while (n--)
-	{
-		*p++ = *c++;
-	}
-	return (dest);
-}
-
-int	ft_strlen(char *s)
+static int	ft_strlen(char *s)
 {
 	int	i;
 

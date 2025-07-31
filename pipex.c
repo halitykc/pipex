@@ -6,18 +6,11 @@
 /*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 12:06:06 by hyakici           #+#    #+#             */
-/*   Updated: 2025/07/31 14:06:37 by hyakici          ###   ########.fr       */
+/*   Updated: 2025/07/31 14:44:38 by hyakici          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	ft_free(char **res, int i)
-{
-	while (--i >= 0)
-		free(res[i]);
-	free(res);
-}
 
 int	main(int argc, char *argv[], char **envp)
 {

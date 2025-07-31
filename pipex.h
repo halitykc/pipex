@@ -6,7 +6,7 @@
 /*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 12:08:47 by hyakici           #+#    #+#             */
-/*   Updated: 2025/07/31 14:27:49 by hyakici          ###   ########.fr       */
+/*   Updated: 2025/07/31 14:55:45 by hyakici          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char		**ft_split(char const *s, char c);
 char		*ft_strjoin(char *s1, char *s2);
 char		*ft_strdup(const char *s);
 char		*ft_strchr(const char *str, int c);
+void		*ft_memcpy(void *dest, const void *src, size_t n);
 
 void		control_params(int argc, char **argv);
 int			output_file_exist(char *outfile);

@@ -6,7 +6,7 @@
 /*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 13:57:00 by hyakici           #+#    #+#             */
-/*   Updated: 2025/07/31 14:09:21 by hyakici          ###   ########.fr       */
+/*   Updated: 2025/07/31 14:54:11 by hyakici          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_split(char **split)
 	free(split);
 }
 
-void	check_if_validfile(char *file)
+static void	check_if_validfile(char *file)
 {
 	if (access(file, F_OK) != 0)
 	{
@@ -38,18 +38,6 @@ void	check_if_validfile(char *file)
 	{
 		perror(file);
 		exit(EXIT_FAILURE);
-	}
-}
-
-void	check_if_validfile2(char *file)
-{
-	if (access(file, F_OK) == 0)
-	{
-		if (access(file, R_OK | W_OK) != 0)
-		{
-			perror(file);
-			return ;
-		}
 	}
 }
 
